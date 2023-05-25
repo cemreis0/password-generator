@@ -32,8 +32,7 @@ const Password = () => {
         <button type="submit" onSubmit={() => dispatch(generatePassword({length: length, includeCharacter: includeCharacter, excludeCharacter: excludeCharacter}))}>Generate</button>
       </form>
       <h3>Your password:</h3>
-      <div className="password-container">      <h3 className="password">{password.password}</h3></div>
-
+      <h3 className="password">{password.password}</h3>
     </div>
   )
 }
