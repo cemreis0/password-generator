@@ -1,17 +1,11 @@
-import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-
-import "./App.css"
-
+import './App.css'
 import Password from './features/password/Password'
 
-const App = () => {
+function App() {
   return (
-    <Router>
-      <Routes>
-        <Route element={<Password />} path="/" />
-      </Routes>
-    </Router>
+    <div className="App">
+      <Password />
+    </div>
   )
 }
 
