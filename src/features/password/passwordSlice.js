@@ -6,19 +6,31 @@ export const passwordSlice = createSlice({
     password: {
       password: "",
       length: 0,
+      includeCharacter: "",
+      excludeCharacter: ""
     }
   },
   reducers: {
-    generatePassword: (state, action) => {
-      const getRandomPassword = (characters, length) => {
-        return Array.from({ length }, () => characters[Math.floor(Math.random() * characters.length)]).join('')
+    generatePassword: (state, action) => {  
+    const getRandomPassword = (length, includeCharacter, excludeCharacter) => {
+      let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()-_=+[]{}|:;"\'<>,.?/'
+      let password = ""
+      password += Array.from({ length }, () => characters[Math.floor(Math.random() * characters.length)]).join('')
+      if (includeCharacter) {
+        password += includeCharacter
+        length -= includeCharacter.length
       }
-      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()-_=+[]{}|\\:;\"\'<>,.?/'
-      state.password.password = getRandomPassword(characters, action.payload.length)
-
+      if (excludeCharacter) {
+        characters.replace(excludeCharacter, "")
+      }
+      password += Array.from({ length }, () => characters[Math.floor(Math.random() * characters.length)]).join('')
+      return password
+    }
+      state.password.password = getRandomPassword(action.payload.length, action.payload.includeCharacter, action.payload.excludeCharacter)
     }
   }
 })
+
 
 export const { generatePassword } = passwordSlice.actions
 
